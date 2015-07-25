@@ -21,6 +21,8 @@ NeoBundle 'bling/vim-airline'
 NeoBundle 'Lokaltog/vim-easymotion'
 NeoBundle 'scrooloose/nerdcommenter'
 NeoBundle 'altercation/vim-colors-solarized'
+NeoBundle 'ervandew/supertab'
+NeoBundle 'Rip-Rip/clang_complete'
 
 call neobundle#end()
 
@@ -31,6 +33,7 @@ NeoBundleCheck
 " Enable syntax highlighting and colorscheme
 syntax enable
 set background=dark
+let g:solarized_termcolors=256
 colorscheme solarized
 
 " Configure indent-guides
@@ -60,11 +63,15 @@ map <Leader>k <Plug>(easymotion-k)
 
 let g:syntastic_scss_checkers = ['sass']
 
+
 " Make insert mode toggleable with F2
 set pastetoggle=<F2>
 
 " Open NERDTree and shift focus to the main window again
-autocmd VimEnter * NERDTree
-autocmd VimEnter * wincmd l
+"autocmd VimEnter * NERDTree
+"autocmd VimEnter * wincmd l
 " Close NERDTree if it's the only thing left open
-autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q 
+"autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q 
+"
+" Make vim rename the tmux window descriptively
+autocmd BufReadPost,FileReadPost,BufNewFile * call system("tmux rename-window " .  expand("%:t"))
