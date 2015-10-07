@@ -23,6 +23,9 @@ NeoBundle 'scrooloose/nerdcommenter'
 NeoBundle 'altercation/vim-colors-solarized'
 NeoBundle 'ervandew/supertab'
 NeoBundle 'Rip-Rip/clang_complete'
+NeoBundle 'fatih/vim-go'
+
+let g:clang_library_path='/usr/lib/llvm-3.4/lib/libclang.so.1'
 
 call neobundle#end()
 
@@ -67,6 +70,16 @@ let g:syntastic_scss_checkers = ['sass']
 " Make insert mode toggleable with F2
 set pastetoggle=<F2>
 
+" Split navigations
+nnoremap <C-J> <C-W><C-J>
+nnoremap <C-K> <C-W><C-K>
+nnoremap <C-L> <C-W><C-L>
+nnoremap <C-H> <C-W><C-H>
+set splitbelow
+set splitright
+
+" CtrlP customizations
+set wildignore+=*.o
 " Open NERDTree and shift focus to the main window again
 "autocmd VimEnter * NERDTree
 "autocmd VimEnter * wincmd l

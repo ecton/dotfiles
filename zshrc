@@ -48,13 +48,14 @@ ZSH_TMUX_AUTOSTART=true
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git bundler tmux wd)
+plugins=(git bundler tmux wd ssh-agent)
 
 source $ZSH/oh-my-zsh.sh
 
 # User configuration
 
-export PATH="$PATH:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games"
+export PATH="$PATH:/usr/local/go/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games"
+export GOPATH="$HOME/.go"
 # export MANPATH="/usr/local/man:$MANPATH"
 
 # You may need to manually set your language environment
@@ -85,3 +86,11 @@ export PATH="$PATH:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:
 export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
 
 alias rake='noglob bundle exec rake'
+alias pads='padrino s --host=10.99.10.154'
+alias pasc='padrino c'
+
+export ALTERNATE_EDITOR=""
+export EDITOR="emacsclient -t"                  # $EDITOR should open in terminal
+export SUDO_EDITOR=EDITOR
+
+alias emax="emacsclient -t"
