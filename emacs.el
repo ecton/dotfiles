@@ -41,11 +41,6 @@
 (setq vc-follow-symlinks t)
 
 
-;; Mousing around
-(require 'mouse)
-(xterm-mouse-mode t)
-(defun track-mouse (e))
-(setq mouse-sel-mode t)
 
 
 ;; Lines!
@@ -57,6 +52,7 @@
 
 ;; org-mode
 (require 'org)
+
 (add-to-list 'auto-mode-alist '("\\.org$" . org-mode))
 (setq org-directory "~/sync/Dropbox/org/")
 (global-set-key (kbd "C-c c") 'org-capture)
@@ -67,6 +63,10 @@
 (setq org-capture-templates
       '(("t" "Todo" entry (file+headline "/home/nilobject/sync/Dropbox/org/inbox.org" "Inbox")
          "* TODO %?\n  %i\n  %a")))
+(setq org-icalendar-include-todo t)
+(setq org-deadline-warning-days 0)
+(setq org-icalendar-timezone " ")
+(setq org-icalendar-date-time-format ":%Y%m%dT%H%M%S")
 (defun nilobject/org-reload ()
   (interactive)
   (setq org-agenda-files (append (file-expand-wildcards (concat org-directory "*.org"))
@@ -96,16 +96,26 @@
   (setq auto-save-interval 20)
   (auto-save-mode t))
 
+
+
 ;; Revert files if they haven't been edited.
 (global-auto-revert-mode)
+
+(defun nilobject/setup-frame ()
+  ;; Mousing around
+  (require 'mouse)
+  (xterm-mouse-mode t)
+  (defun track-mouse (e))
+  (setq mouse-sel-mode t)
+  (load-theme 'afternoon t))
 
 ;; Apply theme in daemon mode
 (if (daemonp)
     (add-hook 'after-make-frame-functions
               (lambda (frame)
                 (select-frame frame)
-                (load-theme 'afternoon t)))
-    (load-theme 'afternoon t))
+                (nilobject/setup-frame)))
+    (nilobject/setup-frame))
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
